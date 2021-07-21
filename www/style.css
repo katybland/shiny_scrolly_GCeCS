@@ -1,0 +1,83 @@
+
+/*
+This is the app to run the GCeCS scrollytell
+code from: https://github.com/connorrothschild/shiny-scrollytell/blob/master/app.R
+start edits July 21, 2021
+last edit July 21, 2021
+edits by Katy Bland 
+*/
+
+@import url("//fonts.googleapis.com/css?family=Lato");
+
+body {
+  color: #3a3a3a;
+    font-family: 'Lato', sans-serif;
+}
+
+hr {
+  border-top: 1px 
+  solid #000000
+}
+
+.container-fluid{
+  background: 0;
+}
+
+.big{
+  font-size: 50px;
+}
+
+.dark {
+  color: black;
+}
+
+.light {
+  color: white;
+}
+
+.title {
+  text-align: center;
+  margin-top: 0;
+  font-size: 70px;
+}
+
+.subtitle {
+  margin-top: 0;
+  text-align: center;
+  font-size: 24px;
+  word-wrap: break-word;
+}
+
+.instructions {
+  padding-left: 0;
+  padding-top: 0;
+  text-align: left;
+  font-size: 16px;
+  word-wrap: break-word;
+}
+
+.text {
+  padding-left: 15px;
+  padding-top: 100px;
+  text-align: left;
+  font-size: 16px;
+  word-wrap: break-word;
+}
+
+.sg{
+  color: black;
+    text-shadow: 2px 2px 14px #949494;
+}
+
+.sg-dark{
+  color: black;
+  text-shadow: 2px 2px 14px #24C96B;
+}
+
+.emph{
+  font-size: 30px;
+}
+
+a:hover{
+  color: black;
+}
