@@ -1,32 +1,23 @@
-
-
 # This is the shiny app 
 # code from: https://github.com/connorrothschild/shiny-scrollytell/blob/master/app.R
 # start edits July 21, 2021
 # last edit July 21, 2021
 # edits by Katy Bland
 
+setwd("~/Documents/GitHub/shiny_scrolly_GCeCS")
 
-
+library(scrollytell)
 library(here)
-source(here("scripts/source_code_for_shiny.R"))
+
+source(here("scripts/pacfin_script.R"))
+
+top_left <- "https://thisiswhidbey.com/wp-content/uploads/2019/08/Dungeness-crabs-Anacortes-commercial-fishery.jpg"
+top_right <- "https://thisiswhidbey.com/wp-content/uploads/2019/08/Dungeness-crabs-Anacortes-commercial-fishery.jpg"
+bottom_left <- "https://thisiswhidbey.com/wp-content/uploads/2019/08/Dungeness-crabs-Anacortes-commercial-fishery.jpg"
+bottom_right <- "https://thisiswhidbey.com/wp-content/uploads/2019/08/Dungeness-crabs-Anacortes-commercial-fishery.jpg"
 
 ui <- fluidPage(
-    
     title = "gcecs",
-    
-    # meta tags
-    meta() %>%
-        meta_social(
-            title = "Gcecs",
-            description = "",
-            # url = "",
-            #image = "",
-            #image_alt = "",
-            #twitter_creator = "",
-            #twitter_card_type = "",
-            #twitter_site = ""
-        ),
     
     # suppress warning messages while data is loading on-screen
     tags$style(
@@ -34,198 +25,212 @@ ui <- fluidPage(
         ".shiny-output-error { visibility: hidden; }",
         ".shiny-output-error:before { visibility: hidden; }"
     ),
+    
+    #point to style sheet for document
     tags$head(includeCSS("www/style.css")),
     
     # article title & name
-    fluidRow(
-        HTML(
-            "<center>
-                <h1> - </h1>
-                <h1> climate change, harmful algal blooms, </h1>
-                <h1> Dungeness crab, and disaster mitigation </h1>
-                <p style='font-size:26px'> by Katy Bland </a></p>
-                <p style='font-size:16px'> created for the UW PCC GCeCS </a></p>
-                </center>"
-        )
-    ),
-    
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
     br(),
     
-    fluidRow(column(1),
-             
-             column(
-                 10,
-                 # intro text
-                 fluidRow(id = 'text',
-                          column(1),
-                          column(
-                              10,
-                              br(),
-                              text0,
-                              hr(),
-                              h1(
-                                  class = "instructions",
-                                  "How to read this chart:",
-                                  br(),
-                                  br(),
-                                  "The size of each",
-                                  icon("circle"),
-                                  "corresponds to the number of workers in that job.",
-                                  br(),
-                                  "Hover over each",
-                                  icon("circle"),
-                                  "to see details on the occupation's income and probability of automation.",
-                                  br(),
-                                  "Double click on a",
-                                  icon("circle"),
-                                  "in the legend to focus on a specific level of education."
-                              )
-                          ),
-                          column(1)),
-                 # plot object for intro
-                 #plotlyOutput("introPlot", height = '400px')
-             ),
-             
-             column(1)),
+    fluidRow(column(2),
+             column(8,
+                    # align = "center",
+                    h1("The climate science of"),
+                    h1("marine harmful algal blooms"),
+                    h2("How Pseudo-nitzschia puts the Dungeness crab fishery in peril"),
+                    br(),
+                    br(),
+                    br(),
+                    br(),
+                    br(),
+                    br(),
+                    br(),
+                    br(),
+                    br(),
+                    br()
+                    ),
+             column(2)
+    ),
     
-    # scrollytelling plot
-    scrolly_container(
-        "scr"
-        ,
-        scrolly_graph(
-            br(),
-            br(),
-            textOutput("section"),
-            br(),
-            HTML('<center>'),
-            plotlyOutput("plot", height = '600px'),
-            HTML('</center>')
+    fluidRow(align = "center", h3("- scroll down to explore the story - ")),
+   
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    br(),
+    
+    fluidRow(id = 'intro',
+             column(3),
+             column(6,
+                    br(),
+                    hr(),
+                    br(),
+                    br(),
+                    br(),
+                    "Across the entire U.S. west coast, the Dungeness crab fishing industry
+                    is a lifeblood of coastal communities. Scroll through the following map to visualize
+                       how much revenue the fishery yeilds in exvessel value."
+                    ),
+             column(3)
+    ),
+                          
+    br(),
+    br(),
+    br(),
+    br(),
+    
+    
+    #Scroll through plots of port exvessel revenue by year 
+    scrolly_container("scr",
+                      scrolly_graph(
+                          br(),
+                          HTML('<center>'),
+                          plotOutput("plot", height = '900px'),
+                          HTML('</center>')),
+                      scrolly_sections(
+                          br(),
+                          br(),
+                          br(),
+                          br(),
+                          scrolly_section(id = 2010,
+                                          fluidRow(id="howto", class = "instructions",
+                                     h2("How to read this map:"),
+                                     br(), 
+                                     "The size and color of each", icon("circle"), "corresponds", br(),
+                                     "to the total exvessel revenue at a group", br(),
+                                     "of ports in a single calendar year.",br(),
+                                      br(),
+                                     "Port groups with landings that", br(),
+                                     "represent < 4 vessels in a year", br(),
+                                     "are not shown for confidentiality purposes."
+                                     )),
+            scrolly_section(id = 2010, fluidRow(id = 'text2010', class = "scrolly1", "2010"),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
+            scrolly_section(id = 2011, fluidRow(id = 'text2011', class = "scrolly1", "2011"),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
+            scrolly_section(id = 2012, fluidRow(id = 'text2012', class = "scrolly1", "2012"),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
+            scrolly_section(id = 2013, fluidRow(id = 'text2013', class = "scrolly1", "2013"),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
+            scrolly_section(id = 2014, fluidRow(id = 'text2014', class = "scrolly1", "2014"),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
+            scrolly_section(id = 2015, fluidRow(id = 'text2015', class = "scrolly1", "2015"),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
+            scrolly_section(id = 2016, fluidRow(id = 'text2016', class = "scrolly1", "2016"),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
+            scrolly_section(id = 2017, fluidRow(id = 'text2017', class = "scrolly1", "2017"),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
+            scrolly_section(id = 2018, fluidRow(id = 'text2018', class = "scrolly1", "2018"),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
+            scrolly_section(id = 2019, fluidRow(id = 'text2019', class = "scrolly1", "2019"),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
+            scrolly_section(id = 2020, fluidRow(id = 'text2020', class = "scrolly1", "2020"),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             
-        )
-        ,
-        scrolly_sections(
-            HTML('<center>'),
-            scrolly_section(id = 0, render_text(0)),
-            scrolly_section(id = 1, render_text(1)),
-            scrolly_section(id = 2, render_text(2)),
-            scrolly_section(id = 3, render_text(3)),
-            scrolly_section(id = 4, render_text(4)),
-            scrolly_section(id = 5, render_text(5)),
-            scrolly_section(id = 6, render_text(6)),
-            scrolly_section(id = 7, render_text(7)),
-            scrolly_section(id = 8, render_text(8)),
             # add a scrolly_section with nothing in it;
             # this buffer prevents the plot from disappearing while reading last section
-            scrolly_section(id = "buffer", br()),
-            HTML('</center>')
-        )
-        
+            scrolly_section(id = 2020, fluidRow(id = 'endscrolly1', class = "scrolly1", h2("Did you see the drop in Dungeness crab landings in 2015?"))),
+            scrolly_section(id = 2020, fluidRow(id = 'blank', class = "scrolly1", br())),
+            scrolly_section(id = 2020, fluidRow(id = 'blank', class = "scrolly1", br()))
+            )
     ),
     
-    # concluding text
-    div(fluidRow(
-        id = 'text',
-        column(2),
-        column(8,
-               concludingtext,
-               br()),
-        column(2)
-    ), style = 'margin-top: -300px;'),
-    
-    br(),
-    br(),
-    br(),
-    hr(),
-    
-    fluidRow(column(1),
-             column(10,
-                    technicalnotes),
-             column(1)),
-    br(),
-    br(),
-    column(1)
-    
+    fluidRow(id = 'intro',
+             column(3),
+             column(6, "The Dungeness crab fishery was closed for up to 
+             5.5 months in some Northern California ports because 
+             of a harmful algal bloom and subsequent domoic acid
+             toxicity. Let’s take a step back and look at why this happened.", br(),
+             br(),
+             "In late 2013, a patch of nutrient-poor warm water 
+             (now termed the Northern Pacific Marine Heatwave Anomaly) 
+             began to linger in the Gulf of Alaska"),
+             br(),
+             br(),
+             br(),
+             br(),
+             br(),
+             br(),
+             column(3)
+    )
 )
 
-# server
-server <- function(input, output, session) {
-    output$plot <- renderPlotly({
-        add <- input$scr
-        
-        plot <- data %>%
-            filter(typicaled != "Some college, no degree") %>%
-            filter(if (add != 8)
-                add >= reveal
-                else
-                    reveal %in% c(1:8)) %>%
-            ggplot() +
-            geom_point(
-                mapping = aes(
-                    x = A_MEDIAN,
-                    y = probability,
-                    size = TOT_EMP,
-                    alpha = ifelse(add == reveal, 1 / 5, 1 / 10),
-                    col = typicaled,
-                    text = glue::glue(
-                        '<span style = "font-size:1.5em">{occupation}</span><br>
-                                                <i>Probability of Automation</i>: {probability}%
-                                                <i>Median Income</i>: ${comma(A_MEDIAN, digits = 0)}
-                                                <i>Number of Workers</i>: {comma(TOT_EMP, digits = 0)}'
-                    )
-                )
-            ) +
-            scale_size(range = c(1, 20)) +
-            xlab("\nMedian Income") +
-            ylab("Probability of Automation") +
-            labs(size = "",
-                 col = "",
-                 alpha = "") +
-            scale_color_manual(values = cols, breaks = legend_ord) +
-            scale_x_continuous(
-                labels = scales::dollar_format(prefix = "$"),
-                limits = c(25000, 200000)
-            ) +
-            scale_y_continuous(labels = scales::number_format(suffix = "%"),
-                               limits = c(0, 100)) +
-            # cr::drop_axis(axis = "y") +
-            theme(
-                axis.line.x = ggplot2::element_line(
-                    colour = NULL,
-                    size = NULL,
-                    linetype = NULL,
-                    lineend = NULL
-                ),
-                axis.line.y = ggplot2::element_blank(),
-                panel.grid.major.x = element_blank()
-            )
-        
-        ggplotly(plot, tooltip = 'text') %>%
-            layout(
-                title = list(element_blank()),
-                legend = list(x = 0.65, y = 0.925),
-                font = list(family = 'Lato'),
-                margin = list(t = 50),
-                hoverlabel = list(bgcolor = 'whitesmoke', color = 'darkGray')
-            ) %>%
-            config(
-                displaylogo = F,
-                showSendToCloud = F,
-                displayModeBar = F
-            )
-        
+
+
+
+
+server <- function(input, output){
+    output$plot <- renderPlot({
+        map_diff_years(input$scr)
     })
     
-    output$introPlot <- renderPlotly({
-        introPlot
-    })
-    output$scr <- renderScrollytell({
-        scrollytell()
-    })
-    renderText(paste0("Section: ", input$scr))
-    observe({
-        cat("section:", input$scr, "\n")
-    })
-    
+    output$scr <- renderScrollytell({scrollytell()})
+    #output$section <- renderText(paste0("Section: ", input$scr))
+
+    # observe({cat("section:", input$scr, "\n")})
 }
+
+
+
+
+
 # Run the application
 shinyApp(ui = ui, server = server)
+
+
+
+
+############
+#### unused, potentially useful code bits
+############
+
+# parent container
+# tags$div(class="landing-wrapper",
+#          # child element 1: images
+#          # tags$div(class="landing-block background-content",
+#          #          # top left
+#          #          img(src= top_left),
+#          #          # top right
+#          #          img(src= top_right),
+#          #          # bottom left
+#          #          img(src=bottom_left),
+#          #          # bottom right
+#          #          img(src=bottom_right)
+#          # ),
+#          # 
+#          # child element 2: content
+#          tags$div(class="landing-block foreground-content",
+#                   tags$div(class="foreground-text",
+#                            tags$h1("The Climate Science of Marine HABs"),
+#                            tags$h2(" "),
+#                            br(),
+#                            tags$h4(em("- scroll down to explore -"))
+#                   )
+#          ),
+#          
+# ),
+

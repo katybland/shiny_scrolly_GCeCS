@@ -1,0 +1,24 @@
+agency_code,port_group,Lon,Lat,port_group_name,Lon_label,Lat_label,dcrb_between,region
+C,BDA,-122.9042075,38.10049,Bodega Bay area ports,-121.9042075,38.20049,0.76,N
+C,BGA,-123.76402,39.18972333,Fort Bragg area ports,-122.76402,39.28972333,0.76,N
+C,CCA,-124.18493,41.745,Crescent City area ports,-123.18493,41.845,0.91,N
+C,ERA,-124.17713,40.86325,Eureka area ports,-123.17713,40.96325,0.94,N
+C,MNA,-121.7427,36.79175333,Monterey area ports,-120.7427,36.89175333,0.36,C
+C,MRA,-120.80428,35.26726,Morro Bay area ports,-119.80428,35.36726,0.2,C
+C,SFA,-122.3736029,37.79038571,San Francisco area ports,-121.3736029,37.89038571,0.76,C
+C,SBA,-119.698189,34.42083,Santa Barbara area ports,,,,
+C,LAA,-118.243683,34.052235,Los Angeles area ports,,,,
+C,SDA,-117.161087,32.715736,San Diego area ports,,,,
+C,CA2,-119.874606,37.533174,Other/Unknown CA ports,,,,
+W,NPS,-122.6315,48.505451,North Puget Sound area ports,,,,
+W,SPS,-122.480635,47.456068,South Puget Sound area ports,,,,
+W,CWA,-124.473997,47.717154,Washington Coastal area ports,,,,
+W,CLW,-124.010606,46.510893,Columbia River WA area ports,,,,
+W,WA5,-121.289429,47.629961,Other/Unknown WA area ports,,,,
+O,CLO,-123.96938,46.172223,Columbia River OR area ports,,,,
+O,TLA,-123.954115,45.50729,Tillamook area ports,,,,
+O,NPA,-124.067408,44.621021,Newport area ports,,,,
+O,CBA,-124.30873,43.391957,Coos Bay area ports,,,,
+O,BRA,-124.292339,42.049767,Brookings area ports,,,,
+O,OR1,,,Land WA/Trans OR,,,,
+O,OR4,,,Other/Unknown OR?,,,,
