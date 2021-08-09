@@ -46,6 +46,7 @@ WA <- WA[-c(3,4,5,7,8,10,11,12,14,15,16,18,19,20,22,23,24,26,27,28,29,30)]
 OR <- OR[c(1,2,6,9,13,17,21,25,29,33)]
 CA <- CA[c(1,2,6,9,13,17,21,25,29,33,37,41,45,49)]
 
+
 #make in tidy format
 WA <- WA %>%
   pivot_longer(!c(1,2,3), names_to = "port", values_to = "exvessel_revenue")
@@ -54,12 +55,15 @@ OR <- OR %>%
 CA <- CA %>%
   pivot_longer(!c(1,2,3), names_to = "port", values_to = "exvessel_revenue")
 
+
 #bind datasets
 all <- bind_rows(WA, OR)
 all <- bind_rows(all, CA)
 
+
 #convert ports to factors
 all$port <- as.factor(all$port)
+
 
 #take off unneccessary part of port name
 levels(all$port) <- gsub('_EXVESSEL_REVENUE', '', levels(all$port))
@@ -106,11 +110,14 @@ map_diff_years <- function(year) {
                                                 <i>Exvessel revenue</i>: ${exvessel_revenue}')),
                alpha = .9) +
     scale_size_continuous(range = c(1, 25),breaks = bb,labels = ll,
-                          limits=c(0, 40000000)) +
-    scale_colour_gradientn(guide = "legend", breaks = bb,labels = ll,
-                           colours = c("burlywood1", "navy")
+                          limits=c(0, 40000000),
+                          guide = guide_legend(reverse = TRUE) ) +
+    scale_colour_gradientn( breaks = bb,labels = ll,
+                           colours = c("#ef8354", "#ccb7ae", "#565264")
                              # myPalette(100)
-                           , limits=c(0, 40000000)) +
+                           , limits=c(0, 40000000),
+                           guide = guide_legend(reverse = TRUE) 
+                            ) +
     labs(size = "Exvessel Revenue",
          color = "Exvessel Revenue"
          # subtitle = year,
@@ -125,100 +132,6 @@ map_diff_years <- function(year) {
     #   legend.text = element_text(size = 16*scale))
   return(map)
 }
-
-
-render_text <- function(num){
-  
-  div(
-    text(num), class = "text"
-  )
-  
-}
-
-text <- function(num){
-  p(
-    switch(num,
-           text1,
-           text2,
-           text3,
-           text4,
-           text5,
-           text6,
-           text7,
-           text8
-    )
-  )
-}
-
-text0 <- HTML("<span style='font-size:20px'> How do jobs differ in their susceptibility to automation? </span>
-              <br><br> 
-              <p> The topic of job automation has rapidly entered the national discourse. 
-              Although it was once a topic reserved for policy wonks, college students, and Reddit Libertarians, it's now a serious talking point&mdash;from 
-              the multitude of news articles documenting the risk of automation, to <a href='https://www.forbes.com/sites/quora/2019/09/27/automation-will-dramatically-change-the-workforce-andrew-yang-has-a-plan-to-bridge-the-gap/#52f0e5df204b' target='_blank'>Andrew Yang's presidential proposal</a> to solve job automation via a universal basic income. 
-              <br> Experts have put forth a wide range of estimates for the true impact of job automization. No matter how severe it is, few argue that automation will have <i>no impact</i>.
-              Most agree that automation will impact the way Americans work, and that it may put many workers out of a job (and many argue it already has).
-              <br><br> But will different workers experience the impacts of automation in different ways? In this post, I combine data from two Oxford researchers, <a href='https://www.oxfordmartin.ox.ac.uk/downloads/academic/The_Future_of_Employment.pdf' target='_blank'>Carl Benedikt Frey and Michael A. Osborne</a>,
-              with employment statistics from the Bureau of Labor Statistics to answer the question: 
-              <br><br>
-              <span style='font-size:18px'> How do jobs differ in their susceptibility to automation? </span>
-              <br> Specifically, how does a worker's <b>level of education</b> and <b>current income</b> influence their risk of job loss to the rise of the robots? <p>")
-
-text1 <- HTML("<H2> 2015 </H2>
-              <br> <p> this is going to be a paragraph on the fundamentals of climate change, 
-              <br> and to the right there will be an infographic about climate change
-              <br> and then there will be another paragraph on how climate change leads to 
-              <br> ocean warming because ocean absorbs heat (and carbon dioxide etc)</right>")
-
-text2 <- HTML("<H2> High school diplomas </H2>
-              <br> <p>Workers with <font color='#F56C42'>high school diplomas</font> have a median income of $25,636.
-              <br> On average, those occupations have a <b>60% chance</b> of job automation.
-              <br><br> There are 33,129,910 workers with a <font color='#F56C42'>high school diploma</font>.<p>")
-
-text3 <- HTML("<H2> Postsecondary nondegree awards </H2>
-              <br> <p>Workers with <font color='#008640'>postsecondary nondegree awards</font> (e.g. actors) have a median income of $39,990.
-              <br> On average, those occupations have a <b>52% chance</b> of job automation.
-              <br><br> There are 5,904,150 workers with a <font color='#008640'>postsecondary nondegree award</font>.<p>")
-
-text4 <- HTML("<H2> Associate's degrees </H2>
-              <br> <p>Workers with <font color='#3487BD'>associate's degrees</font> have a median income of $41,496.
-              <br> On average, those occupations have a <b>50% chance</b> of job automation.
-              <br><br> There are 1,869,840 workers with an <font color='#3487BD'>associate's degree</font>.<p>")
-
-text5 <- HTML("<H2> Bachelor's degrees </H2>
-              <br> <p>Workers with <font color='#C71C7E'>bachelor's degrees</font> have a median income of $59,124.
-              <br> On average, those occupations have a <b>20% chance</b> of job automation.
-              <br><br> There are 18,399,270 workers with a <font color='#C71C7E'>bachelor's degree</font>.<p>")
-
-text6 <- HTML("<H2> Master's degrees </H2>
-              <br> <p>Workers with <font color='#5E4FA2'>master's degrees</font> have a median income of $69,732.
-              <br> On average, those occupations have a <b>10% chance</b> of job automation.
-              <br><br> There are 1,281,710 workers with a <font color='#5E4FA2'>master's degree</font>.<p>")
-
-text7 <- HTML("<H2> Doctoral degrees </H2>
-              <br> <p>Workers with <b>doctoral degrees</b> have a median income of $84,396.
-              <br> On average, those occupations have a <b>3% chance</b> of job automation.
-              <br><br> There are 1,386,850 workers with a <b>doctoral degree</b>.<p>")
-
-text8 <- HTML("<H2> In Sum </H2>
-              <br> <p>All things considered, the nominal median income of an average US worker is <b>$31,786</b>.
-              <br>
-              <br> 47% of jobs are expected to face a high risk of automatization in the near future.<sup>1</sup><p>
-              <br><br><br>
-              <span style='font-size:11px'><sup>1</sup><a href='https://www.oxfordmartin.ox.ac.uk/downloads/academic/The_Future_of_Employment.pdf' target='_blank'>Frey and Osborne (2013)</a>
-               write that 'associated occupations are potentially automatable over
-              some unspecified number of years, <i>perhaps a decade or two.'</i></span>")
-
-concludingtext <- HTML("<p><span style='font-size:24px'><b>The Risk of Automation</b></span>
-                        <br>
-                            <span style='font-size:18px'>This data led researchers Carl Frey and Michael Osborne to predict that 47% of jobs are at serious risk of automation over the next couple decades.
-                        <br>
-                            <br>The visuals above suggest that the ills of automation may not be evenly distributed across jobs.
-                            Less educated workers are more likely to face job loss as a product of automation. Those with high school diplomas or less find themself concentrated near the top of the y-axis, while those with bachelor’s degrees or higher face a lower risk of automation.
-                        <br>
-                            <br>A job’s salary is also predictive of automation probability. As the median income of a profession increases, the likelihood of automation displacing its workers decreases.
-                            This could suggest that automation will increasingly bifurcate the already divided labor market, making those at the top wealthier at the expense of the worse-off.
-                        <br>
-                            <br>Automation’s impact on work necessitates a policy response. The fact that automation will have different effects on different industries and different workers is a reminder that this public policy will have to be strategic and thoughtful.</span></p>")
 
 
 # # make different maps for different years

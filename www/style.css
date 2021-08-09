@@ -34,6 +34,18 @@ h3 {
   color: #222222;
 }
 
+h4 {
+  font-family: "Euphemia UCAS";
+  font-size: 12px !important;
+  color: #222222;
+}
+
+h5 {
+  font-family: "Euphemia UCAS";
+  font-size: 16px !important;
+  color: #222222;
+}
+
 
 hr {
   border-top: 1px 
@@ -94,6 +106,7 @@ hr {
   word-wrap: break-word;
   margin:15px !important;
 }
+
 
 .sg{
   color: black;
