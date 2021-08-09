@@ -2,7 +2,7 @@
 # make pacfin public data map by port group 2010-2020
 
 rm(list = ls())
-setwd("~/Documents/GitHub/shiny_scrolly_GCeCS")
+#setwd("~/Documents/GitHub/shiny_scrolly_GCeCS")
 
 
 

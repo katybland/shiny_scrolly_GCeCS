@@ -55,7 +55,7 @@ ui <- fluidPage(
              style = "background-color: #FFFFFF;", 
              column(3),
              column(6, img(src = "images/IMG_3318_1080x.png", height = "100%", width = "100%")),
-             column(3, br(), br(),br(), br(),br(), br(),br(), br(),br(), br(),br(), br(),
+             column(3,br(), br(),br(), br(),br(), br(),br(), br(),br(), br(),
                     h4("scroll down to explore the story"))
     ),
     
@@ -406,7 +406,7 @@ ui <- fluidPage(
                      hr(),
                      h4("App created in RStudio by Katy Bland in 2021",  
                         br(),
-                        "Find the R code on Github:", tags$a(href = "https://github.com/cjteeter/ShinyTeeter/tree/master/3_MastersGolf", 
+                        "Find the R code on Github:", tags$a(href = "https://github.com/katybland/shiny_scrolly_GCeCS", 
                                                            tags$i(class = 'fa fa-github', style = 'color:#5000a5')), 
                         br(),
                      "Have a question? Spot an error? Send an email ", 

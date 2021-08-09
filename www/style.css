@@ -9,6 +9,8 @@ edits by Katy Bland
 
 @import url("//fonts.googleapis.com/css2?family=STIX+Two+Math&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"); 
+
 body {
   color: #3a3a3a;
     font-family: "Euphemia UCAS";
@@ -16,14 +18,14 @@ body {
 }
 
 h1 {
-  font-family: "Euphemia UCAS";
-  font-size: 45px !important;
+  font-family: "Bebas Neue";
+  font-size: 80px !important;
   font-weight: normal;
   color: #222222;
 }
 
 h2 {
-  font-family: "Euphemia UCAS";
+  font-family: "Bebas Neue";
   font-size: 30px !important;
   color: #222222;
 }
