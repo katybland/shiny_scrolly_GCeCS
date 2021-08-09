@@ -6,7 +6,7 @@
 
 
 
-setwd("~/Documents/GitHub/shiny_scrolly_GCeCS")
+# setwd("~/Documents/GitHub/shiny_scrolly_GCeCS")
 
 library(scrollytell)
 library(here)
@@ -45,8 +45,8 @@ ui <- fluidPage(
     fluidRow(style = "background-color: #FFFFFF;",
              column(2),
              column(8,
-                    h1("THE CLIMATE SCIENCE", br(), "OF MARINE HARMFUL ALGAL BLOOMS", br()),
-                    h2("How Pseudo-nitzschia puts the Dungeness crab fishery in peril")
+                    h1("THE PHYSICAL SCIENCE BASIS", br(), "OF MARINE HARMFUL ALGAL BLOOMS", br()),
+                    h2("How Pseudo-nitzschia puts the U.S. West Coast Dungeness crab fishery in peril")
                    ),
              column(2)
     ),
@@ -55,8 +55,8 @@ ui <- fluidPage(
              style = "background-color: #FFFFFF;", 
              column(3),
              column(6, img(src = "images/IMG_3318_1080x.png", height = "100%", width = "100%")),
-             column(3,br(), br(),br(), br(),br(), br(),br(), br(),br(), br(),
-                    h4("scroll down to explore the story"))
+             column(3,br(), br(),br(), br(),br(), 
+                    h5("scroll down to explore the story"))
     ),
     
     # 
@@ -64,7 +64,7 @@ ui <- fluidPage(
     #          ),
    
     fluidRow(style = "background-color: #FFFFFF;",
-             br(),br(),
+             br(),br()
              ),
     
     fluidRow(id = 'intro',
@@ -76,7 +76,7 @@ ui <- fluidPage(
                     br(),
                     "Across the U.S. west coast, the Dungeness crab fishing industry
                     is an economic and cultural lifeblood of coastal communities. Scroll through the following map to visualize
-                       how much revenue the fishery yeilds in exvessel value."
+                       how much revenue the fishery yields in exvessel value (the monetary worth of commercial landings)."
                     ),
              column(3)
     ),
@@ -104,7 +104,7 @@ ui <- fluidPage(
                                      "of ports in a single calendar year.",br(),
                                       br(),
                                      "Port groups with landings that", br(),
-                                     "represent < 4 vessels in a year", br(),
+                                     "represent less than four vessels in a year", br(),
                                      "are not shown for confidentiality purposes."
                                      )),
             scrolly_section(id = 2010, fluidRow(id = 'text2010', class = "scrolly1", "2010"),
@@ -134,15 +134,15 @@ ui <- fluidPage(
             # this buffer prevents the plot from disappearing while reading last section
             scrolly_section(id = 2015, fluidRow(id = 'endscrolly1', class = "scrolly1", 
                                                 h2("Did you see the drop in 2015 landings?"),
-                                                   h3("In California and Oregon, the Dungeness crab fishery usually opens in 
+                                                   h3("In California, Oregon and coastal Washington, the Dungeness crab fishery usually opens in 
                                                    late November or early/mid December (opening date varies by region). 
                                                    Instead of opening at the end of 2015, however, 
                                                    a harmful algal bloom forced the Dungeness crab fishery
-                                                   to close for up to 5.5 months in some ports. 
+                                                   to close for up to five and a half months in some ports. 
                                                    The usual early season pulse of landings didn't occur, 
                                                    and instead, this season's (reduced) landings were pushed into 2016.", br(),
                                                    br(),
-                                                   h2("Let's take a step back to look at", em("why"),"the 
+                                                   h2("Let's take a step back to look at", em("why"), br(), "the 
                                                    toxic bloom happened in 2015.")
                                                    ))),
             
@@ -163,7 +163,7 @@ ui <- fluidPage(
                     to a “ridiculously resilient” atmospheric high pressure ridge.
                     This warm water patch was soon termed the
                     “Northern Pacific Marine Heatwave Anomaly”
-                    or, colloquially, “The Blob”.", br(), br(), br(),br()
+                    or, colloquially, “The Blob”.", br(), br(),
              ),
              column(3)
     ),
@@ -182,11 +182,17 @@ ui <- fluidPage(
     
     fluidRow(id = 'intro',
              column(3),
-             column(6,  "In late 2014, following the end of spring/summer 2014 upwelling,
+             column(6,  "In Spring 2014, the Pacific Decadal Oscillation (PDO) entered a positive phase. 
+                    The PDO is ocean-atmospheric pattern of variability in ocean 
+                    surface temperatures in the mid-latitude Pacific. During a PDO warm (positive) phase,
+                    the eastern Pacific ocean warms and the western-central Pacific ocean cools. At the same time,
+                    spring upwelling conditions began and tempered the warm temperatures along the U.S. West Coast.",  br(),br(),
+             
+             "By late 2014, following the end of spring/summer 2014 upwelling,
                     the blob began to encroach upon coastal zones, raising temperatures
                     along the continental shelf. The blob was 2.5°C warmer at the surface
                     than the long term mean and enabled warm-water species to move north.", br(),
-                    fluidRow(br(), 
+                    fluidRow(br(), br(), br(),
                              column(3, br(), img(src = "images/pseudo-nitzschia-australis-diatom.png", height = "90%", width = "90%" )),
                              column(9, style = "background-color: #F4F1E2;" , 
                              "One of the microscopic marine algae that extended 
@@ -285,7 +291,7 @@ ui <- fluidPage(
     ),
 
     
-    br(),br(),br(),br(),br(),br(),br(),br(),br(),
+    br(),br(),br(),br(),br(),br(),br(),
     
     
     # fluidRow(column(2),
@@ -304,7 +310,7 @@ ui <- fluidPage(
     fluidRow(br(),
              column(3),
              column(6, "The following plot visualizes the 2015 Dungeness crab season delay length 
-             by port in central and northern California, in comparison with other years. 
+             by port group in central and northern California, in comparison with other years. 
              Click on the plot, then hover over each bar to 
                     see the port group name and delay length.",
                     br(), h4("*Dungeness crab seasons are identified here by the year they normally would have started 
@@ -320,14 +326,77 @@ ui <- fluidPage(
     
     fluidRow(column(2),
              column(8, 
-                        plotlyOutput("bar_closure_test", height = '600px')
-                    ),
+                        plotlyOutput("bar_closure_test", height = '600px'),
+                    h4("*data from Fisher et al., 2021")),
              column(2)
              ),
     
-                    
+    br(),br(),br(),br(),br(),br(),br(),
+    
+    fluidRow(column(3),
+             column(6, "Although natural variability can cause heatwaves, 
+                    this devastating marine heatwave was five times more likely
+                    to occur because of human-induced climate change. The blob is one of many marine heatwaves 
+                    over the last two decades that can likely be attributed to humans.", br(), br(), br(), br(),
+                    img(src = "images/IPCC_fig6.3.png", height = "90%", width = "90%"),
+                    h4(em("Image and caption adapted from Bindoff et al., 2019:"), "Examples of recent marine heatwaves (MHWs) and their observed impacts. 
+                       (a) Examples of documented MHWs over the last two decades and their impacts on natural, 
+                       physical and socioeconomic systems. The colour map shows the maximum sea surface
+                       temperature (SST) anomaly during the MHW using the National Oceanic and Atmospheric Administration’s
+                       (NOAA) daily Optimum Interpolation SST dataset (Reynolds et al. 2007; Banzon et al. 2016).
+                       A MHW is defined here as a set of spatially and temporally coherent grid points 
+                       exceeding the 99th percentile. The 99th percentile is calculated over the 1982–2011 
+                       reference period after de-seasonalising the data. Red shading of the boxes indicates
+                       if the likelihood of MHW occurrence has increased due to anthropogenic climate change, 
+                       and symbols denote observed impacts on physical systems over land, marine ecosystems,
+                       and socioeconomic and human systems. Figure is updated from Frölicher and Laufkötter (2018
+                       ) and is not a complete compilation of all documented MHWs."),
+                    br(), br(), br(), br(),
+                    h2("But what about other instances of domoic acid presence on the U.S. West Coast, outside of the blob?"),
+                    "The coupling of warm  phases of natural ocean-atmospheric oscillations with both warming oceans 
+                    and local upwelling conditions set the stage for harmful algal blooms and domoic acid production.
+                    See the plot below from McKibben et al. (2017), which shows the link between 
+                    large scale ocean-atmospheric phenomenon (Pacific Decadal Oscillation and the El Niño Southern Oscillation)
+                    and domoic acid production."),
+             column(3)
+    ),
+    
+    
+      
+    br(), br(), br(),
+    
+    fluidRow(align = "center", 
+             img(src = "images/McKibben_et_al_2017_fig1.png", height = "60%", width = "60%")
+    ),
+    
+    
+    br(), br(), br(), br(),
+    
+    fluidRow(column(3),
+             column(6, 
+                    h2("What might be to come and what can be done?"),
+                    "The frequency, duration, spatial extent, and intensity of marine heatwaves 
+                    are projected to increase in the future. With that, the occurance and toxicity 
+                    of HABs is also expected to increase. ", "The Dungeness crab industry is already feeling the devastating impacts of HABs, 
+                    so mitigating these impacts will therefore be critical to the survival of the industry.", br(),
+                    br(),
+                    "In reaction to the prevalence of domoic acid in recent years, west coast states are now employing 
+                    management strategies (namely evisceration orders) that may alleviate these Dungeness crab 
+                    industry disruptions. Evisceration orders dictate that crab exceeding the action level 
+                    in crab viscera (30 parts per million), but below the action level in crab meat (20 parts per million) 
+                    must be gutted to be sold. Evisceration keeps the fishery open but limits crab product forms. 
+                    Depuration of toxins, by holding crab in tanks until crab viscera and tissue is below the action level,
+                    is another potential strategy for combating industry disruptions.", br(), 
+                    br(),
+                    "In the face of a warming ocean and more frequent domoic acid episodes, understanding the relative
+                    benefit of each strategy will be vital to ensuring the wellbeing of the Dungeness crab industry
+                    and coastal communities across the west coast."),
+             column(3)
+             ),
+  
     
     br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
+    
     
     
 
@@ -338,8 +407,11 @@ ui <- fluidPage(
     ### Further Resources ----------------
     
     fluidRow(column(3),
-             column(6, h1("Looking for further detail on anything mentioned above?"), 
-                          h2("Check out the following resources:"),
+             column(6, 
+                    hr(),
+                    h1("Looking for further detail on anything mentioned above?"), 
+                       h2("Check out the following resources:"), 
+                         
                     br(),
                     br(),
                     tags$ul(
@@ -372,6 +444,19 @@ ui <- fluidPage(
                     Marine harmful algal blooms (HABs) in the United States: History, current status and future trends. 
                     Harmful Algae, 102(January), 101975. https://doi.org/10.1016/j.hal.2021.101975"),
                     
+                    h4("Bindoff, N.L., W.W.L. Cheung, J.G. Kairo, J. Arístegui, V.A. Guinder, R. Hallberg,
+                       N. Hilmi, N. Jiao, M.S. Karim, L. Levin, S. O’Donoghue, S.R. Purca Cuicapusa, B. Rinkevich,
+                       T. Suga, A. Tagliabue, and P. Williamson, 2019: Changing Ocean, Marine Ecosystems, 
+                       and Dependent Communities. In: IPCC Special Report on the Ocean and Cryosphere in a 
+                       Changing Climate [H.-O. Pörtner, D.C. Roberts, V. Masson-Delmotte, P. Zhai,
+                       M. Tignor, E. Poloczanska, K. Mintenbeck, A. Alegría, M. Nicolai, A. Okem, J. Petzold
+                       , B. Rama, N.M. Weyer (eds.)]. In press."),
+                    
+                    h4("Fisher, M. C., Moore, S. K., Jardine, S. L., Watson, J. R., & Samhouri, J. F. (2021).
+                       Climate shock effects and mediation in fisheries.
+                       Proceedings of the National Academy of Sciences, 118(2), e2014379117. 
+                       https://doi.org/10.1073/pnas.2014379117"),
+                    
                     h4("Lewitus, A. J., Horner, R. A., Caron, D. A., Garcia-Mendoza, E., Hickey, B. M., Hunter,
                     M., Huppert, D. D., Kudela, R. M., Langlois, G. W., Largier, J. L., Lessard, 
                     E. J., RaLonde, R., Jack Rensel, J. E., Strutton, P. G., Trainer, V. L., & Tweddle, J. F. (2012). 
@@ -382,6 +467,11 @@ ui <- fluidPage(
                     Adams, N. G., Bill, B. D., Gulland, F. M. D., Thomson, R. E., Cochlan, W. P., & Trainer, V. L. (2016). 
                     An unprecedented coastwide toxic algal bloom linked to anomalous ocean conditions. 
                     Geophysical Research Letters, 43(19), 10,366-10,376. https://doi.org/10.1002/2016GL070023"),
+                    
+                    h4("McKibben, S. M., Peterson, W., Wood, A. M., Trainer, V. L., Hunter, M., & White, A. E. (2017).
+                       Climatic regulation of the neurotoxin domoic acid. 
+                       Proceedings of the National Academy of Sciences of the United States of America, 114(2), 239–244.
+                       https://doi.org/10.1073/pnas.1606798114"),
                     
                     h4("National Center for Biotechnology Information (2021). 
                     PubChem Compound Summary for CID 5282253, Domoic acid. 

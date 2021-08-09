@@ -2,7 +2,7 @@
 
 #CA historical closures 
 
-setwd("~/Documents/GitHub/shiny_scrolly_GCeCS")
+# setwd("~/Documents/GitHub/shiny_scrolly_GCeCS")
 
 library(tidyverse)
 library(sf)
@@ -46,8 +46,9 @@ make_bar_closure <- function() {
       panel.background = element_blank(),
       text = element_text(size = 20))+
     xlab("") +
-    ylab("Days closed") +
     scale_x_continuous(labels=as.character(closures_sp$y),breaks=closures_sp$y) +
+    scale_y_continuous(name = "Days closed",
+      sec.axis = sec_axis(~.*1, name="Days closed")) +
     scale_fill_manual(values = rev(c( "#81171b", "#ef8354","#c97c5d","#ccb7ae","#a6808c", "#565264",    "black")))
     # scale_fill_viridis(discrete = TRUE, name = "California Port Group") 
     # labs(caption = "*Dungeness crab seasons are identified by the year they would have started.", 
