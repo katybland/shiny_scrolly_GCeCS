@@ -45,8 +45,8 @@ ui <- fluidPage(
     fluidRow(style = "background-color: #FFFFFF;",
              column(2),
              column(8,
-                    h1("When a marine heatwave", br(), "leads to a fishery disaster", br()),
-                    h2("How harmful algal blooms threaten the U.S. West Coast Dungeness crab fishery")
+                    h1("THE PHYSICAL SCIENCE BASIS", br(), "OF MARINE HARMFUL ALGAL BLOOMS", br()),
+                    h2("How Pseudo-nitzschia puts the U.S. West Coast Dungeness crab fishery in peril")
                    ),
              column(2)
     ),
@@ -74,23 +74,9 @@ ui <- fluidPage(
                     br(),
                     hr(),
                     br(),
-                    "In January 2017, the U.S. Secretary of Commerce declared eight 'Federal Fishery Disasters' in U.S. waters.
-                    Among these were the 2015/16 California Dungeness crab fishery
-                    and the 2015/16 Quileute Dungeness crab fishery (a Tribal fishery on the Washington coast). 
-                    Congress eventually provided $25.8 Million and $1.5 Million, respectively, 
-                    of relief funding to those directly affected by these fishery disasters.", br(), 
-                    br(), 
-                    h2("Why were they 'federal fishery disasters'?") ,"Broadly, 
-                       federal fishery disasters are major fishery disruptions 
-                       arising from natural, undetermined, or in certain circumstances man-made causes. ",
-                    br(), br(),
-                    "Scroll down to see the monetary worth of 
-                    U.S. West Coast state Dungeness crab commercial fishery landings from 2010-2020. 
-                    Keep an eye out for the major revenue disruption in 2015/16."
-                  
-                    # "Across the U.S. west coast, the Dungeness crab fishing industry
-                    # is an economic and cultural lifeblood for coastal communities. So when the fishery 
-                    
+                    "Across the U.S. west coast, the Dungeness crab fishing industry
+                    is an economic and cultural lifeblood of coastal communities. Scroll through the following map to visualize
+                       how much revenue the fishery yields in exvessel value (the monetary worth of commercial landings)."
                     ),
              column(3)
     ),
@@ -100,156 +86,87 @@ ui <- fluidPage(
     
     #Scroll through plots of port exvessel revenue by year 
     scrolly_container("scr",
-                      
                       scrolly_graph(
-                          br(),br(),br(),br(),br(),br(),br(),
+                          br(),
                           HTML('<center>'),
-                          plotOutput("rev_plot",
-                                     height = "500px",
-                                    width = "900px"),
+                          plotOutput("plot", height = '800px'),
                           HTML('</center>')),
                       scrolly_sections(
                           
                           br(),br(),br(),br(),
                           
+                          scrolly_section(id = 2010,
+                                          fluidRow(id="howto", class = "instructions",
+                                     h2("How to read this map:"),
+                                     br(), 
+                                     "The size and color of each", icon("circle"), "corresponds", br(),
+                                     "to the total exvessel revenue at a group", br(),
+                                     "of ports in a single calendar year.",br(),
+                                      br(),
+                                     "Port groups with landings that", br(),
+                                     "represent less than four vessels in a year", br(),
+                                     "are not shown for confidentiality purposes."
+                                     )),
             scrolly_section(id = 2010, fluidRow(id = 'text2010', class = "scrolly1", "2010"),
-                            br(),br(),br(),br()),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             scrolly_section(id = 2011, fluidRow(id = 'text2011', class = "scrolly1", "2011"),
-                            br(),br(),br(),br()),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             scrolly_section(id = 2012, fluidRow(id = 'text2012', class = "scrolly1", "2012"),
-                            br(),br(),br(),br()),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             scrolly_section(id = 2013, fluidRow(id = 'text2013', class = "scrolly1", "2013"),
-                            br(),br(),br(),br()),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             scrolly_section(id = 2014, fluidRow(id = 'text2014', class = "scrolly1", "2014"),
-                            br(),br(),br(),br()),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             scrolly_section(id = 2015, fluidRow(id = 'text2015', class = "scrolly1", "2015"),
-                            br(),br(),br(),br()),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             scrolly_section(id = 2016, fluidRow(id = 'text2016', class = "scrolly1", "2016"),
-                            br(),br(),br(),br()),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             scrolly_section(id = 2017, fluidRow(id = 'text2017', class = "scrolly1", "2017"),
-                            br(),br(),br(),br()),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             scrolly_section(id = 2018, fluidRow(id = 'text2018', class = "scrolly1", "2018"),
-                            br(),br(),br(),br()),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             scrolly_section(id = 2019, fluidRow(id = 'text2019', class = "scrolly1", "2019"),
-                            br(),br(),br(),br()),
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             scrolly_section(id = 2020, fluidRow(id = 'text2020', class = "scrolly1", "2020"),
-                            br(),br(),br(),br()),
-            
-            
+                            br(),br(),br(),br(),br(),br(),br(),br(),br()),
             
             # add a scrolly_section with nothing in it;
             # this buffer prevents the plot from disappearing while reading last section
-            scrolly_section(id = 2020, fluidRow(id = 'endscrolly1', class = "scrolly1", 
-                                                h2("Why was there such as dramatic drop in revenue?"),
-                                                   h3("In California, Oregon and coastal Washington,
-                                                   the Dungeness crab fishery usually opens in 
+            scrolly_section(id = 2015, fluidRow(id = 'endscrolly1', class = "scrolly1", 
+                                                h2("Did you see the drop in 2015 landings?"),
+                                                   h3("In California, Oregon and coastal Washington, the Dungeness crab fishery usually opens in 
                                                    late November or early/mid December (opening date varies by region). 
                                                    Instead of opening at the end of 2015, however, 
-                                                  the Dungeness crab fishery was closed for up to five and a half months
-                                                  in some ports because of a severe harmful algal bloom. 
-                                                   The usual early season pulse of crab catch didn't occur, 
+                                                   a harmful algal bloom forced the Dungeness crab fishery
+                                                   to close for up to five and a half months in some ports. 
+                                                   The usual early season pulse of landings didn't occur, 
                                                    and instead, this season's (reduced) landings were pushed into 2016.", br(),
-                                                   br()
-                                                   
-                                                  
+                                                   br(),
+                                                   h2("Let's take a step back to look at", em("why"), br(), "the 
+                                                   toxic bloom happened in 2015.")
                                                    ))),
             
-            scrolly_section(id = 2020, fluidRow(id = 'blank', class = "scrolly1", br())),
+            scrolly_section(id = 2015, fluidRow(id = 'blank', class = "scrolly1", br()))
+            ),
             hr()
-            )
     ),
     
     
-    fluidRow(br(),
+    
+    
+    
+    fluidRow(hr(),
              column(3),
-             column(6, br(), br(), br(),br(), br(), br(),br(), br(), br(),br(), 
-                    h2("Although season delays are common, this delay was unprecedented."),br(), 
-             "The following plot visualizes the 2015 Dungeness crab season delay length 
-             by port group in central and northern California, in comparison with other years. Hover over each bar to 
-                    see the port group name and delay length.",
-                    br(), h4("*Dungeness crab seasons are identified here by the year they normally would have started 
-                             (2015 represents the season that would have started in November 2015 and ended in July 2016).")),
+             column(6, br(), br(), br(), br(), br(), br(),
+                    "In late 2013, a patch of nutrient-poor warm water
+                    began to linger in the Gulf of Alaska, due in part
+                    to a “ridiculously resilient” atmospheric high pressure ridge.
+                    This warm water patch was soon termed the
+                    “Northern Pacific Marine Heatwave Anomaly”
+                    or, colloquially, “The Blob”.", br(), br(),
+             ),
              column(3)
     ),
-    
-    fluidRow(column(1),
-             column(7, 
-                    plotlyOutput("bar_closure_test", height = '600px'),
-                    h4("*data from Fisher et al., 2021")),
-             column(3, br(), br(), 
-                    plotOutput("CA_map_stag")),
-             column(1)
-    ),
-    
-    fluidRow(
-             column(3),
-             column(6, 
-                    br(), br(), br(),br(), br(), 
-                    h1("Let's take a step back to look at... "),h2("why harmful algal blooms happen,", br(),
-                       "why they become toxic,", br(), "and how they impact the fishery.")),
-             column(3)
-    ),
-    
-    fluidRow(br(),br(),br(),
-             column(3,  align = "right", img(src = "images/pseudo-nitzschia-australis-diatom.png", height = "90%", width = "90%" )),
-             column(6, 
-                    # style = "background-color: #F4F1E2;" , 
-                    em("Pseudo-nitzschia"), "is a genus of over 50 known species of diatoms
-                             that sit at the bottom of marine food chains.",
-                    em("Pseudo-nitzschia australis"), "is a species that is well-adapted to low-nutrient conditions and
-                    extreme temperatures, responds quickly to nutrient inputs, and like 25 other species,",
-                    em("Pseudo-nitzschia australis"),  "can produce toxins.", br(),
-                    br(),
-                    "When provided with warm water and nutrients,", em("Pseudo-nitzschia australis"), 
-                    "quickly reproduces and creates a 'bloom'. Although these blooms are dramatic, 
-                    they are only harmful if the bloom produces domoic acid, an amnesic shellfish toxin (AST) 
-                    that can linger in seafloor sediments and digestive systems after the bloom has subsided.", br(),
-                    br(),
-                    "Although the conditions that enable domoic acid production are environment-specific 
-                    and are still being studied,", em("Pseudo-nitzschia"), "species have produced domoic acid when
-                    the quantity of silicate is limited. Additionally, interannual variability in the ratio of 
-                    nitrogen to silicate may be important for domoic acid production.",
-                    br(), br(),
-                    "Filter feeders (like razor clams) and opportunistic feeders (like Dungeness crabs)
-                               can quickly concentrate domoic acid in their digestive tracts.  
-                               Because domoic acid does not bioaccumulate in tissue,
-                               it can be expelled from marine organisms over time via a process called depuration.  
-                               Until clams and crabs are depurated of toxic levels of domoic acid, however
-                               these fisheries are shut down to avoid amnesic shellfish poisoning in humans. "),
-             
-             column(3, br(), br(), br(), br(), br(), br(),br(), br(), br(),
-                    img(src = "images/domoic_acid.png", height = "80%", width = "80%" ))
-    ),
-                    
-    fluidRow(id = 'intro',
-             column(3),
-             column(6, br(), br(), br(), br(),
-                    h2("Why do", em("Pseudo-nitzschia"),"blooms happen on the U.S. West Coast?"),
-                    "The coupling of natural ocean-atmospheric oscillations in the Pacific Ocean 
-                    and yearly upwelling conditions on the U.S. West Coast set the stage for harmful algal blooms 
-                    and domoic acid production. One oscillation, the Pacific Decadal Oscillation 
-                    is ocean-atmospheric pattern of variability in ocean 
-                    surface temperatures in the mid-latitude Pacific.", br(),br(),
-                    img(align = "center", src = "images/PDO_NOAA.png", height = "100%", width = "100%" ),
-                    h4("Image: climate.gov"),
-                    br(),br(),
-                    "During a PDO warm (positive) phase,
-                    the eastern Pacific ocean warms and the western-central Pacific ocean cools.
-                    
-                    See the plot below from McKibben et al. (2017), which shows the link between 
-                    large scale ocean-atmospheric phenomenon (Pacific Decadal Oscillation and the El Niño Southern Oscillation),
-                    sea surface temperature and domoic acid production in Oregon razor clams.", br(), br()),
-             column(3)
-    ),
-    br(),br(),
-    
-    fluidRow(align = "center", 
-             img(src = "images/McKibben_et_al_2017_fig1.png", height = "70%", width = "70%")
-    ),
-    
-  
-    
-    
     
     #hold for an RRR picture?
     # fluidRow(id = 'intro',
@@ -265,30 +182,47 @@ ui <- fluidPage(
     
     fluidRow(id = 'intro',
              column(3),
-             column(6, br(), br(), br(), br(), br(), 
-                    h2("Why was the harmful algal bloom in 2015 so severe, though?"),
-                    
-                    "In late 2013, a patch of nutrient-poor warm water began to linger in the Gulf of Alaska, 
-                    This warm water patch was soon termed the “Northern Pacific Marine Heatwave Anomaly”
-                    or, colloquially, “The Blob”. Additionally, the Pacific Decadal Oscillation (PDO)
-                    entered a positive (warm) phase in Spring 2014. ", br(), br(),
+             column(6,  "In Spring 2014, the Pacific Decadal Oscillation (PDO) entered a positive phase. 
+                    The PDO is ocean-atmospheric pattern of variability in ocean 
+                    surface temperatures in the mid-latitude Pacific. During a PDO warm (positive) phase,
+                    the eastern Pacific ocean warms and the western-central Pacific ocean cools. At the same time,
+                    spring upwelling conditions began and tempered the warm temperatures along the U.S. West Coast.",  br(),br(),
              
-                    "By late 2014, following the end of spring/summer 2014 upwelling,
-                    the Blob began to encroach upon coastal zones, raising temperatures
-                    along the continental shelf. The Blob was 2.5°C warmer at the surface
-                    than the long term mean and enabled warm-water species to move north.", br(), br(),
-                    
-                    "As spring upwelling conditions returned in early 2015, 
-                    coastal areas were injected with upwelled nutrients 
-                    and relatively cold water from the deep ocean. The image below shows cooler,
-                    nutrient rich water along the U.S. West Coast (green) and the Blob offshore (red)"),
-             
-                    
+             "By late 2014, following the end of spring/summer 2014 upwelling,
+                    the blob began to encroach upon coastal zones, raising temperatures
+                    along the continental shelf. The blob was 2.5°C warmer at the surface
+                    than the long term mean and enabled warm-water species to move north.", br(),
+                    fluidRow(br(), br(), br(),
+                             column(3, br(), img(src = "images/pseudo-nitzschia-australis-diatom.png", height = "90%", width = "90%" )),
+                             column(9, style = "background-color: #F4F1E2;" , 
+                             "One of the microscopic marine algae that extended 
+                             their range and survived these anomalously warm conditions
+                             along the entire west coast was", em("Pseudo-nitzschia australis."), br(),
+                             br(), 
+                             "It is one of over 50 known species in the", 
+                             em("Pseudo-nitzschia"), "genus, which are diatoms
+                             that sit at the bottom of marine food chains. Importantly,",
+                             em("P. australis"), "is well-adapted to low-nutrient conditions and responds
+                             quickly to nutrient inputs."))
+                    ),
              column(3)
     ),
     
     
-    fluidRow(br(), br(),
+    
+    
+    br(), br(), br(), br(),
+    
+    fluidRow(id = 'intro',
+             column(3),
+             column(6, "As spring upwelling conditions returned in early 2015, 
+                    coastal areas were injected with upwelled nutrients 
+                    and relatively cold water from the deep ocean.", br(), br(),br()
+             ),
+             column(3)
+    ),
+    
+    fluidRow(id = 'intro',
              column(3),
              column(6, align = "right",
                     "sea surface temperature anomaly, May 2015", br(),
@@ -299,86 +233,152 @@ ui <- fluidPage(
              ),
     
     
+    fluidRow(br(),br(),br(),br(),br(),br(),br(),br(),br(),
+             column(3, align = "right",
+                    img(src = "images/pseudo-nitzschia-australis-diatom.png", height = "30%", width = "30%" ),
+                    img(src = "images/domoic_acid.png", height = "50%", width = "50%" )),
+             column(6, 
+                    column(3, img(src = "images/pseudo-nitzschia-australis-diatom.png", height = "90%", width = "90%" )),
+                    column(9, style = "background-color: #F4F1E2;" , 
+                    em("Pseudo-nitzschia"), "quickly bloomed and subsequently
+                    produced domoic acid, an amnesic shellfish toxin (AST).",  
+                    em("P. australis"), "is one of over 25 species in the genus known 
+                    to produce ASTs, although the conditions that enable AST production 
+                    are environment specific and are still being studied.")),
+             column(3, 
+                    img(src = "images/domoic_acid.png", height = "50%", width = "50%"),
+                    img(src = "images/pseudo-nitzschia-australis-diatom.png", height = "30%", width = "30%" ))
+             ),
+    
+    fluidRow(align = "center", 
+             img(src = "images/domoic_acid.png", height = "50%", width = "50%")
+             ),
+    
     fluidRow(id = 'end_blob',
              br(),br(),br(),br(),br(),br(),
-             column(3,
-                    fluidRow(align = "center", 
-                             img(src = "images/domoic_acid.png", height = "50%", width = "50%"))),
-             column(6, "Because of the unusually warm water and nutrient supply,", em("P. australis"), 
-                    "quickly bloomed and subsequently produced domoic acid.",
-                    "By November 2015, strong winds from Alaska began to churn the Blob and dissipate the warm surface waters.
-                    Although the Blob and the", em("P. australis"), "bloom were diminished, 
-                    domoic acid still remained in seafloor sediments, Dungeness crab,
-                    and scores of other organisms across the coast.",
-                    h2("Coastwide, the Blob indirectly lead to unprecedented levels of domoic acid.") ),
-             column(3,
-                    fluidRow(align = "center", 
-                             img(src = "images/domoic_acid.png", height = "50%", width = "50%")))
+             column(3),
+             column(6, "By November 2015, with the return of El Niño 
+             (a cyclical oceanic-atmospheric phenomenon), strong winds from Alaska 
+             began to churn the blob and dissipate the warm surface waters."),
+             column(3)
     ),
     
-    fluidRow(br(), br(),
-             column(12, br(), align = "center",
-                    img(src = "images/DA_map_large.png",height = "80%", width = "80%"), br(),
-                    fluidRow(column(8),
-                             column(4, h4("Image: NOAA’s Northwest Fisheries Science Center.")))
-                    ),
-               
+    fluidRow(br(),br(),br(),br(),br(),
+             column(3, align = "right",
+                    img(src = "images/domoic_acid.png", height = "50%", width = "50%" ),
+                    img(src = "images/domoic_acid.png", height = "30%", width = "30%" )),
+             column(6, 
+                    fluidRow(
+                        column(3, img(src = "images/domoic_acid.png", height = "90%", width = "90%" )),
+                        column(9, style = "background-color: #F4F1E2;" , 
+                           "Although the Blob and the", em("P. australis"), "bloom were diminished, 
+                           domoic acid still remained in seafloor sediments and in the 
+                           digestive tracts of many marine organisms. DA concentrates 
+                           in the digestive tracts of those that ingest it, 
+                           with little movement to surrounding tissues.")),
+                    fluidRow(br(),
+                        column(3),
+                        column(9, style = "background-color: #F4F1E2;" , 
+                               "Filter feeders (like razor clams) and opportunistic feeders (like Dungeness crabs)
+                               can quickly concentrate domoic acid in their digestive tracts.  
+                               Because domoic acid does not bioaccumulate in tissue,
+                               it can be expelled from marine organisms over time via a process called depuration.  
+                               But until clams and crabs are depurated of toxic levels of domoic acid, 
+                               these fisheries are shut down to avoid amnesic shellfish poisoning in humans. "))),
+             column(3, 
+                    img(src = "images/domoic_acid.png", height = "50%", width = "50%"),
+                    img(src = "images/domoic_acid.png", height = "30%", width = "30%" ))
     ),
-    
-    # fluidRow(br(),br(),br(),br(),br(),br(),br(),br(),br(),
-    #          column(3, align = "right",
-    #                 img(src = "images/pseudo-nitzschia-australis-diatom.png", height = "30%", width = "30%" ),
-    #                 img(src = "images/domoic_acid.png", height = "50%", width = "50%" )),
-    #          column(6, 
-    #                 column(3, img(src = "images/pseudo-nitzschia-australis-diatom.png", height = "90%", width = "90%" )),
-    #                 column(9, style = "background-color: #F4F1E2;" , 
-    #                 em("Pseudo-nitzschia"), "quickly bloomed and subsequently
-    #                 produced domoic acid.",  
-    #                 em("P. australis"))),
-    #          column(3, 
-    #                 img(src = "images/domoic_acid.png", height = "50%", width = "50%"),
-    #                 img(src = "images/pseudo-nitzschia-australis-diatom.png", height = "30%", width = "30%" ))
-    #          ),
 
     
-    # fluidRow(br(),br(),br(),br(),br(),
-    #          column(3, align = "right",
-    #                 img(src = "images/domoic_acid.png", height = "50%", width = "50%" ),
-    #                 img(src = "images/domoic_acid.png", height = "30%", width = "30%" )),
-    #          column(6, 
-    #                 fluidRow(
-    #                     column(3, img(src = "images/domoic_acid.png", height = "90%", width = "90%" )),
-    #                     column(9, style = "background-color: #F4F1E2;" )),
-    #                 fluidRow(br(),
-    #                     column(3),
-    #                     column(9, style = "background-color: #F4F1E2;" , 
-    #                           )),
-    #          column(3, 
-    #                 img(src = "images/domoic_acid.png", height = "50%", width = "50%"),
-    #                 img(src = "images/domoic_acid.png", height = "30%", width = "30%" ))
+    br(),br(),br(),br(),br(),br(),br(),
+    
+    
+    # fluidRow(column(2),
+    #          column(6,
+    #                 # Input: Simple integer interval ----
+    #                 sliderInput("integer", "Pick a year to view the Dungeness crab fishery closure length:",
+    #                             sep="", ticks = FALSE,  min = 2005, max = 2017, value = 2005),
+    #                 plotOutput("closures_map", height = '600px')
+    #                 ),
+    #          
+    #          column(2, plotOutput("closures_table")),
+    #          column(2),
+    #          
     # ),
-    # 
-    # 
-    br(),br(),br(),br(),
+    
+    fluidRow(br(),
+             column(3),
+             column(6, "The following plot visualizes the 2015 Dungeness crab season delay length 
+             by port group in central and northern California, in comparison with other years. Hover over each bar to 
+                    see the port group name and delay length.",
+                    br(), h4("*Dungeness crab seasons are identified here by the year they normally would have started 
+                             (2015 represents the season that would have started in November 2015 and ended in July 2016).")),
+             column(3)
+             ),
+    
+    # fluidRow(column(3),
+    #          column(6, h2("Califronia Dungeness crab season delay by port")
+    #          ),
+    #          column(3)
+    # ),
+    
+    fluidRow(column(2),
+             column(8, 
+                        plotlyOutput("bar_closure_test", height = '600px'),
+                    h4("*data from Fisher et al., 2021")),
+             column(2)
+             ),
+    
+    br(),br(),br(),br(),br(),br(),br(),
+    
+    fluidRow(column(3),
+             column(6, "Although natural variability can cause heatwaves, 
+                    this devastating marine heatwave was five times more likely
+                    to occur because of human-induced climate change. The blob is one of many marine heatwaves 
+                    over the last two decades that can likely be attributed to humans.", br(), br(), br(), br(),
+                    img(src = "images/IPCC_fig6.3.png", height = "90%", width = "90%"),
+                    h4(em("Image and caption adapted from Bindoff et al., 2019:"), "Examples of recent marine heatwaves (MHWs) and their observed impacts. 
+                       (a) Examples of documented MHWs over the last two decades and their impacts on natural, 
+                       physical and socioeconomic systems. The colour map shows the maximum sea surface
+                       temperature (SST) anomaly during the MHW using the National Oceanic and Atmospheric Administration’s
+                       (NOAA) daily Optimum Interpolation SST dataset (Reynolds et al. 2007; Banzon et al. 2016).
+                       A MHW is defined here as a set of spatially and temporally coherent grid points 
+                       exceeding the 99th percentile. The 99th percentile is calculated over the 1982–2011 
+                       reference period after de-seasonalising the data. Red shading of the boxes indicates
+                       if the likelihood of MHW occurrence has increased due to anthropogenic climate change, 
+                       and symbols denote observed impacts on physical systems over land, marine ecosystems,
+                       and socioeconomic and human systems. Figure is updated from Frölicher and Laufkötter (2018
+                       ) and is not a complete compilation of all documented MHWs."),
+                    br(), br(), br(), br(),
+                    h2("But what about other instances of domoic acid presence on the U.S. West Coast, outside of the blob?"),
+                    "The coupling of warm  phases of natural ocean-atmospheric oscillations with both warming oceans 
+                    and local upwelling conditions set the stage for harmful algal blooms and domoic acid production.
+                    See the plot below from McKibben et al. (2017), which shows the link between 
+                    large scale ocean-atmospheric phenomenon (Pacific Decadal Oscillation and the El Niño Southern Oscillation)
+                    and domoic acid production."),
+             column(3)
+    ),
+    
+    
+      
+    br(), br(), br(),
+    
+    fluidRow(align = "center", 
+             img(src = "images/McKibben_et_al_2017_fig1.png", height = "60%", width = "60%")
+    ),
     
     
     br(), br(), br(), br(),
     
     fluidRow(column(3),
              column(6, 
-                    h2("What does this have to do with climate change?"),
-                    
-                    "Although natural variability can cause heatwaves, 
-                    this devastating marine heatwave is very likely attributed to human-induced climate change.
-                    The frequency, duration, spatial extent, and intensity of marine heatwaves 
+                    h2("What might be to come and what can be done?"),
+                    "The frequency, duration, spatial extent, and intensity of marine heatwaves 
                     are projected to increase in the future. With that, the occurance and toxicity 
-                    of HABs is also expected to increase. ",  br(),
-                    br(),
-                    "The Dungeness crab industry is already feeling the devastating impacts of HABs, 
+                    of HABs is also expected to increase. ", "The Dungeness crab industry is already feeling the devastating impacts of HABs, 
                     so mitigating these impacts will therefore be critical to the survival of the industry.", br(),
                     br(),
-                    
-                    h2("What can be done?"), br(),
                     "In reaction to the prevalence of domoic acid in recent years, west coast states are now employing 
                     management strategies (namely evisceration orders) that may alleviate these Dungeness crab 
                     industry disruptions. Evisceration orders dictate that crab exceeding the action level 
@@ -394,17 +394,7 @@ ui <- fluidPage(
              ),
   
     
-    br(),
-    fluidRow(br(), br(), br(),
-             style = "background-color: #FFFFFF;", 
-             column(4),
-             column(4, img(src = "images/sections_pacific_dreams.png", height = "100%", width = "100%"),
-                    h4("Image: Pacific Dream Seafoods")),
-             column(4
-                    )
-    ),
-    
-    br(),br(),br(),br(),br(),br(),
+    br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
     
     
     
@@ -423,14 +413,6 @@ ui <- fluidPage(
                          
                     br(),
                     br(),
-                    tags$ul(
-                      tags$li(p("U.S. Federal Fishery Disasters"),
-                              tags$ul(
-                                tags$li(tags$a(href = "https://www.fisheries.noaa.gov/national/funding-and-financial-services/fishery-disaster-determinations",
-                                                                              "Past fishery disaster determinations")),
-                                tags$li(tags$a(href = "https://www.fisheries.noaa.gov/national/resources-fishing/frequent-questions-fishery-disaster-assistance", 
-                                                                         "Federal Fishery Disaster FAQ"))))),
-                    
                     tags$ul(
                       tags$li(p("U.S. West Coast Dungeness crab fishery management bodies"),
                               tags$ul(
@@ -555,33 +537,7 @@ ui <- fluidPage(
 
 
 server <- function(input, output){
-    #updated new first plot
-  output$rev_plot <- renderPlot({
-    plot_diff_years(input$scr) 
-  })
-  
-  output$rev_plot_2015 <- renderPlot({
-    highlight_2015(input$scr) 
-  })
-  
-  output$CA_map_stag <- renderPlot({
-    ggplot() +
-      geom_sf(data = ca_geom, fill = "grey",
-              # color = "transparent", 
-              alpha = 0.45) +
-      geom_point(data = filter(all_spatial, port %in% CA_closures$pcgroup),
-                 aes(x = Lon, y = Lat, color = port_group_name), size = 4) +
-      geom_text(data = filter(all_spatial,port %in% CA_closures$pcgroup),
-                aes(x = Lon, y = Lat, label= port_group_name),
-                hjust = -.1, size = 5) +
-      scale_color_manual(values = rev(c( "#81171b", "#ef8354","#c97c5d","#ccb7ae","#a6808c", "#565264", "black"))) +
-      theme_void() +
-      theme(legend.position = "none")
-  })
-  
-  
-  
-  
+    
     #for first scrolly container
     output$plot <- renderPlot({
         map_diff_years(input$scr)

@@ -9,6 +9,9 @@ library(sf)
 library(spData)
 library(knitr)
 library(viridis)
+library(cowplot)
+library(gridGraphics)
+
 
 CA_closures <- read.csv("data/DCRB_Historic_Closures_CA_updated.csv")
 pcgroup_coords <- read.csv('data/pcgroup_mean_coordinates.csv')
@@ -21,8 +24,27 @@ closures_sp <- left_join(CA_closures, pcgroup_coords, by = c("pcgroup" = "port_g
 CA_geom <- us_states %>% 
   filter(NAME == "California")
 
+
+g2 <- ggplotGrob(
+  ggplot() +
+    geom_sf(data = ca_geom, fill = "grey",
+            # color = "transparent", 
+            alpha = 0.45) +
+    geom_point(data = filter(all_spatial, port %in% CA_closures$pcgroup),
+               aes(x = Lon, y = Lat, color = port_group_name), size = 4) +
+    geom_text(data = filter(all_spatial,port %in% CA_closures$pcgroup),
+              aes(x = Lon, y = Lat, label= port_group_name),
+              hjust = -.1, 
+              size = 10
+    ) +
+    scale_color_manual(values = rev(c( "#81171b", "#ef8354","#c97c5d","#ccb7ae","#a6808c", "#565264", "black"))) +
+    theme_void() +
+    theme(legend.position = "none"))
+
+
+
 make_bar_closure <- function() {
-  p<- ggplot(closures_sp) +
+   g1<- ggplot(closures_sp) +
     geom_bar(aes(x = y, y = days.closed, fill = port_group_name, 
                  text = glue::glue('<span style = "font-size:1.5em">{port_group_name}</span>
                                                 <i>Year</i>: {y}
@@ -34,7 +56,8 @@ make_bar_closure <- function() {
     #           nudge_x = -.3, nudge_y = 2.5) +
     theme_bw() +
     theme(
-      # legend.position = c(.2, .8),
+      axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1),
+      legend.position = "none",
       panel.grid.major = element_blank(), 
       panel.grid.minor = element_blank(),
       # axis.text.x = element_text(vjust = 10),
@@ -47,16 +70,15 @@ make_bar_closure <- function() {
       text = element_text(size = 20))+
     xlab("") +
     scale_x_continuous(labels=as.character(closures_sp$y),breaks=closures_sp$y) +
-    scale_y_continuous(name = "Days closed",
-      sec.axis = sec_axis(~.*1, name="Days closed")) +
-    scale_fill_manual(values = rev(c( "#81171b", "#ef8354","#c97c5d","#ccb7ae","#a6808c", "#565264",    "black")))
-    # scale_fill_viridis(discrete = TRUE, name = "California Port Group") 
-    # labs(caption = "*Dungeness crab seasons are identified by the year they would have started.", 
-    #      br(), "2015 represents the season that would have started in November 2015")
-  p
+    scale_y_continuous(name = "Days closed") +
+    scale_fill_manual(values = rev(c( "#81171b", "#ef8354","#c97c5d","#ccb7ae","#a6808c", "#565264", "black")))
+
   
-  ggplotly(p, tooltip = 'text')
+  ggplotly(g1, tooltip = 'text') 
 }
+
+
+
 
 ggplotly(make_bar_closure())
 

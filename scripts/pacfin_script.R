@@ -65,12 +65,122 @@ all <- bind_rows(all, CA)
 all$port <- as.factor(all$port)
 
 
-#take off unneccessary part of port name
+#take off unnecessary part of port name
 levels(all$port) <- gsub('_EXVESSEL_REVENUE', '', levels(all$port))
 
 
 #add in coordinates
 all_spatial <- left_join(all, pcgroup_coords, by = c("port" = "port_group"))
+
+#aggregate to state level for plot
+agg_spatial <- all_spatial %>% 
+  group_by(AGENCY_CODE, LANDING_YEAR) %>% 
+  summarize(total_evr = sum(exvessel_revenue, na.rm = TRUE)) 
+  # mutate(reveal = case_when(
+  #   LANDING_YEAR == 2010 ~ 1,
+  #   LANDING_YEAR == 2011 ~ 2,
+  #   LANDING_YEAR == 2012 ~ 3,
+  #   LANDING_YEAR == 2013 ~ 4,
+  #   LANDING_YEAR == 2014 ~ 5,
+  #   LANDING_YEAR == 2015 ~ 6,
+  #   LANDING_YEAR == 2016 ~ 7,
+  #   LANDING_YEAR == 2017 ~ 8,
+  #   LANDING_YEAR == 2018 ~ 9,
+  #   LANDING_YEAR == 2019 ~ 10,
+  #   LANDING_YEAR == 2020 ~ 11,
+  # ))
+
+
+
+plot_diff_years <- function(year) {
+  plot <- ggplot(data = agg_spatial, aes(LANDING_YEAR, y = total_evr)) +
+    # geom_point(aes(x = as.factor(LANDING_YEAR), y = total_evr ,color = AGENCY_CODE)) +
+    geom_line(aes(group = AGENCY_CODE, 
+                  color = AGENCY_CODE,
+                  alpha = ifelse(LANDING_YEAR+1 <= year, 1, 0)),
+              size = 3) +
+    geom_point(aes(color = AGENCY_CODE,
+                  alpha = ifelse(LANDING_YEAR <= year, 1, 0)),
+               size = 4) +
+    geom_text(aes(label=paste("$", round(total_evr/1000000, digits = 1), "Million"), 
+                  alpha = ifelse(LANDING_YEAR == year, 1, 0)),
+              size = 5,
+              hjust= ifelse(year < 2020, -.2, 1.3), vjust= ifelse(year < 2020, 0, .2)) +
+    scale_color_manual(name = "",
+                       labels = c("California", "Oregon", "Washington"),
+                       values = c("#c97c5d","#ccb7ae", "#565264")) +
+    scale_alpha(range = c(0, 1), guide = 'none') +
+    theme_bw() +
+    theme(legend.position = c(.75, .15),
+      # legend.position = "top",
+          text = element_text(size=22),
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          panel.background = element_blank()) +
+    xlab("") +
+    ylab("") +
+    scale_x_continuous(breaks = seq(from = 2010, to = 2020, by = 1)) +
+    scale_y_continuous(limits = c(0, 110000000),
+                       breaks=c(0, 30000000, 60000000, 90000000),
+                       labels = c("0", "$30 Million", "$60 Million", "$90 Million")) 
+  
+  plot
+  
+}
+
+plot_diff_years(2020)
+
+
+highlight_2015 <- function(year) {
+  plot <- ggplot() +
+    # geom_point(aes(x = as.factor(LANDING_YEAR), y = total_evr ,color = AGENCY_CODE)) +
+    geom_line(data = agg_spatial, aes(LANDING_YEAR, y = total_evr, group = AGENCY_CODE, 
+                  color = AGENCY_CODE),
+                  alpha =.5,
+              size = 3) +
+    geom_point(data = agg_spatial, aes(LANDING_YEAR, y = total_evr, color = AGENCY_CODE),
+                   alpha = .5,
+               size = 4) +
+    geom_point(data = filter(agg_spatial, LANDING_YEAR == 2015), aes(LANDING_YEAR, y = total_evr, color = AGENCY_CODE),
+                   alpha = 1 ,
+               size = 6) +
+    # geom_text(aes(label=paste("$", round(total_evr/1000000, digits = 1), "Million"), 
+    #               alpha = ifelse(LANDING_YEAR == year, 1, 0)),
+    #           size = 5,
+    #           hjust= ifelse(year < 2020, -.2, 1.3), vjust= ifelse(year < 2020, 0, .2)) +
+    scale_color_manual(name = "",
+                       labels = c("California", "Oregon", "Washington"),
+                       values = c("#c97c5d","#ccb7ae", "#565264")) +
+    scale_alpha(range = c(0, 1), guide = 'none') +
+    theme_bw() +
+    theme(legend.position = c(.75, .15),
+          # legend.position = "top",
+          text = element_text(size=22),
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          panel.background = element_blank()) +
+    xlab("") +
+    ylab("") +
+    scale_x_continuous(breaks = seq(from = 2010, to = 2020, by = 1)) +
+    scale_y_continuous(limits = c(0, 110000000),
+                       breaks=c(0, 30000000, 60000000, 90000000),
+                       labels = c("0", "$30 Million", "$60 Million", "$90 Million")) 
+  
+  plot
+  
+}
+
+highlight_2015(2020)
+
+
+  
+
+
+
+
+
+
+
 
 
 # ggplot() +
@@ -82,6 +192,9 @@ all_spatial <- left_join(all, pcgroup_coords, by = c("port" = "port_group"))
 #get basemap 
 wc_geom <- us_states %>% 
   filter(NAME %in% c("Washington", "Oregon", "California"))
+
+ca_geom <-  us_states %>% 
+  filter(NAME == "California")
 
 
 bb <- seq(from = 0, to = 40000000, length.out = 11)  #define size breaks
@@ -133,6 +246,7 @@ map_diff_years <- function(year) {
   return(map)
 }
 
+map_diff_years(2010)
 
 # # make different maps for different years
 # map2010 <- map_diff_years(2010)
@@ -146,6 +260,9 @@ map_diff_years <- function(year) {
 # map2018 <- map_diff_years(2018)
 # map2019 <- map_diff_years(2019)
 # map2020 <- map_diff_years(2020)
+
+
+
 
 # Convert into ggplotly
 # ggplotly(map2010)

@@ -5,9 +5,10 @@ account: katybland
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4472364
-bundleId: 4905019
+bundleId: 4930079
 url: https://katybland.shinyapps.io/dcrb_hab/
-when: 1628537187.76913
-lastSyncTime: 1628537187.76914
+when: 1629145101.32282
+lastSyncTime: 1629145101.32283
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: .RData|app_v1.R|README.md|scripts/closures_plots.R|scripts/earthdata_exploration.R|scripts/pacfin_script.R|scripts/source_code_for_shiny.R|scripts/unused_code.R|data|www
