@@ -10,7 +10,6 @@ library(spData)
 library(knitr)
 library(viridis)
 library(cowplot)
-library(gridGraphics)
 
 
 CA_closures <- read.csv("data/DCRB_Historic_Closures_CA_updated.csv")
@@ -25,27 +24,28 @@ CA_geom <- us_states %>%
   filter(NAME == "California")
 
 
-g2 <- ggplotGrob(
+g2 <- 
   ggplot() +
     geom_sf(data = ca_geom, fill = "grey",
             # color = "transparent", 
             alpha = 0.45) +
-    geom_point(data = filter(all_spatial, port %in% CA_closures$pcgroup),
+    geom_point(data = filter(pcgroup_coords, port_group %in% CA_closures$pcgroup),
                aes(x = Lon, y = Lat, color = port_group_name), size = 4) +
-    geom_text(data = filter(all_spatial,port %in% CA_closures$pcgroup),
+    geom_text(data = filter(pcgroup_coords,port_group %in% CA_closures$pcgroup),
               aes(x = Lon, y = Lat, label= port_group_name),
               hjust = -.1, 
-              size = 10
+              size = 5
     ) +
     scale_color_manual(values = rev(c( "#81171b", "#ef8354","#c97c5d","#ccb7ae","#a6808c", "#565264", "black"))) +
     theme_void() +
-    theme(legend.position = "none"))
+    theme(legend.position = "none")
+g2
 
 
 
 make_bar_closure <- function() {
    g1<- ggplot(closures_sp) +
-    geom_bar(aes(x = y, y = days.closed, fill = port_group_name, 
+    geom_bar(aes(x = y+1, y = days.closed, fill = port_group_name, 
                  text = glue::glue('<span style = "font-size:1.5em">{port_group_name}</span>
                                                 <i>Year</i>: {y}
                                                 <i>Days delayed</i>: {days.closed}'
@@ -69,7 +69,7 @@ make_bar_closure <- function() {
       panel.background = element_blank(),
       text = element_text(size = 20))+
     xlab("") +
-    scale_x_continuous(labels=as.character(closures_sp$y),breaks=closures_sp$y) +
+    scale_x_continuous(labels=as.character(closures_sp$y+1),breaks=closures_sp$y+1) +
     scale_y_continuous(name = "Days closed") +
     scale_fill_manual(values = rev(c( "#81171b", "#ef8354","#c97c5d","#ccb7ae","#a6808c", "#565264", "black")))
 
